@@ -265,12 +265,47 @@
 
 
 <!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>Coming soon...</code></pre>
-    </div>
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <button id="copy-btn" onclick="copyBibtex()" 
+      style="
+        background-color: #f4f4f5;
+        border: 1px solid #d4d4d8;
+        border-radius: 6px;
+        padding: 6px 12px;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+      "
+      onmouseover="this.style.backgroundColor='#e4e4e7'; this.style.borderColor='#a1a1aa';"
+      onmouseout="this.style.backgroundColor='#f4f4f5'; this.style.borderColor='#d4d4d8';"
+    >
+      📋 Copy
+    </button>
+    <pre><code id="bibtex-code"></code></pre>
+  </div>
 </section>
+
+<script>
+function copyBibtex() {
+  const codeElement = document.getElementById("bibtex-code");
+  const btn = document.getElementById("copy-btn");
+  const text = codeElement.innerText.trim();
+
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = "✅ Copied";
+    setTimeout(() => {
+      btn.textContent = "📋 Copy";
+    }, 1200);
+  }).catch(err => {
+    console.error("Failed to copy: ", err);
+  });
+}
+</script>
 <!--End BibTex citation -->
 
 
